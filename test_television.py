@@ -56,7 +56,35 @@ class tests(unittest.TestCase):
         tv5.channel_down()
         self.assertEqual(tv5.__str__(), "Power = True, Channel = 0, Volume = 0")
     
-    
+    def test_volume_up(self):
+        tv6 = Television()
+        tv6.volume_up()
+        self.assertEqual(tv6.__str__(), "Power = False, Channel = 0, Volume = 0")
+        tv6.power()
+        tv6.volume_up()
+        self.assertEqual(tv6.__str__(), "Power = True, Channel = 0, Volume = 1")
+        tv6.mute()
+        tv6.volume_up()
+        self.assertEqual(tv6.__str__(), "Power = True, Channel = 0, Volume = 2")
+        tv6.volume_up()
+        self.assertEqual(tv6.__str__(), "Power = True, Channel = 0, Volume = 2")
+
+    def test_volume_down(self):
+        tv7 = Television()
+        tv7.power()
+        tv7.volume_up()
+        tv7.volume_up()
+        tv7.power()
+        tv7.volume_down()
+        self.assertEqual(tv7.__str__(), "Power = False, Channel = 0, Volume = 2")
+        tv7.power()
+        tv7.volume_down()
+        self.assertEqual(tv7.__str__(), "Power = True, Channel = 0, Volume = 1")
+        tv7.mute()
+        tv7.volume_down()
+        self.assertEqual(tv7.__str__(), "Power = True, Channel = 0, Volume = 0")
+        tv7.volume_down()
+        self.assertEqual(tv7.__str__(), "Power = True, Channel = 0, Volume = 0")
 
 if __name__ == '__main__':
     unittest.main()

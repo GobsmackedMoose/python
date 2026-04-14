@@ -72,7 +72,7 @@ class Television():
         if self.__muted:
             self.__muted = False
         if self.__status:
-            if self.__volume > Television.__MIN_VOLUME:
+            if self.__volume > Television.MIN_VOLUME:
                 self.__volume -= 1
 
     def __str__(self) -> str:

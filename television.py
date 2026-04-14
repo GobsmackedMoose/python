@@ -7,82 +7,81 @@ class Television():
     MIN_CHANNEL:int = 0 
     MAX_CHANNEL:int = 3
     
-    def __init__(self):
+    def __init__(self) -> None:
         """
         These are the class variables of the television class. 
         """
-        self.status:bool = False
-        self.muted:bool = False
-        self.volume:int = self.MIN_VOLUME
-        self.channel:int = self.MIN_CHANNEL
+        self.__status:bool = False
+        self.__muted:bool = False
+        self.__volume:int = Television.MIN_VOLUME
+        self.__channel:int = Television.MIN_CHANNEL
 
-    def power(self):
+    def power(self) -> None:
         """
         This is the power method, which will turn the television on and off when invoked. It will 
         make the variable opposite of what it is when the method is invoked. 
         """
-        self.status:bool = not(self.status)
+        self.__status:bool = not(self.__status)
 
-    def mute(self):
+    def mute(self) -> None:
         """
         This is the mute method, which will mute or unmute the television when invoked. 
         It will make the variable opposite of what it is when the method is invoked.
         """
+        if self.__status:
+            self.__muted:bool = not(self.__muted)
 
-        if self.status:
-            self.muted:bool = not(self.muted)
-
-    def channel_up(self):
+    def channel_up(self) -> None:
         """
         This is the channel up method, which will increase the channel by 1 when invoked. 
         If the channel is at the maximum channel, it will go back around to the minimum channel.
         """
-        if self.status:
-            self.channel += 1
-            if self.channel > self.MAX_CHANNEL:
-                self.channel = self.MIN_CHANNEL
+        if self.__status:
+            self.__channel += 1
+            if self.__channel > Television.MAX_CHANNEL:
+                self.__channel = Television.MIN_CHANNEL
 
-    def channel_down(self):
+    def channel_down(self) -> None:
         """
         This is the channel down method, which will decrease the channel by 1 when invoked.
         If the channel is at the minimum channel, it will go back around to the maximum channel
         """
-        if self.status:
-            self.channel -= 1
-            if self.channel < self.MIN_CHANNEL:
-                self.channel = self.MAX_CHANNEL
+        if self.__status:
+            self.__channel -= 1
+            if self.__channel < Television.MIN_CHANNEL:
+                self.__channel = Television.MAX_CHANNEL
 
-    def volume_up(self):
+    def volume_up(self) -> None:
         """
         The volume up method will increase the volume by 1 when invoked.
         If the volume is at the maximum volume, it will stay at the maximum volume. 
         If the television is muted, it will unmute the television and then increase the volume by 1.
         """
-        if self.muted:
-            self.muted = False
-        if self.status:
-            if self.volume < self.MAX_VOLUME:
-                self.volume += 1
+        if self.__muted:
+            self.__muted = False
+        if self.__status:
+            if self.__volume < Television.MAX_VOLUME:
+                self.__volume += 1
 
-    def volume_down(self):
+    def volume_down(self) -> None:
         """
         The volume down method will decrease the volume by 1 when invoked.
         If the volume is at the minimum volume, it will stay at the minimum volume. 
         If the television is muted, it will unmute the television and then decrease the volume by 1.
         """
-        
-        if self.muted:
-            self.muted = False
-        if self.status:
-            if self.volume > self.MIN_VOLUME:
-                self.volume -= 1
+        if self.__muted:
+            self.__muted = False
+        if self.__status:
+            if self.__volume > Television.__MIN_VOLUME:
+                self.__volume -= 1
 
-    def __str__(self):
+    def __str__(self) -> str:
         """
         This is the string representation method for the Television class.
         It returns the power, channel and volume variables. 
         """
-        if not(self.muted):
-            return f'Power = {self.status}, Channel = {self.channel}, Volume = {self.volume}'
+        if not(self.__muted):
+            return f'Power = {self.__status}, Channel = {self.__channel}, Volume = {self.__volume}'
         else:
-            return f'Power = {self.status}, Channel = {self.channel}, Volume = 0'
+            return f'Power = {self.__status}, Channel = {self.__channel}, Volume = 0'
+

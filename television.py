@@ -1,4 +1,3 @@
-
 class Television():
     """
     This has the class variables, and are all meant to be constants. 
